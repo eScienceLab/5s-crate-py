@@ -1,0 +1,19 @@
+[project]
+name = "fivesafe_crate_py"
+version = "0.0.1"
+authors = [
+  { name = "Douglas Lowe", email = "douglas.lowe@manchester.ac.uk" },
+]
+description = "Library for creating and consuming 5-Safes RO-Crates"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["fivesafe_crate_py"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
