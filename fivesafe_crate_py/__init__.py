@@ -72,27 +72,3 @@ class FiveSafesCrate(ROCrate):
 
     def add_person_from_prov(self, metadata):
         self.add(Person(self, metadata['orcid'], properties = metadata))
-
-
-def create_empty_fivesafe_crate(rocrate_base_version="1.3",
-                                rocrate_fivesafes_version="1.0-draft"
-                                ):
-    crate = ROCrate(version=rocrate_base_version)
-
-    crate.update_jsonld({
-        "@id": "./",
-        "@type": "Dataset",
-        "conformsTo": [
-            {"@id": fivesafes_crate["@id"]}
-        ],
-        "identifier": "https://tre72.example.org/activities/A123/versions/2",
-        "dct:isVersionOf": {"@id": "https://tre72.example.org/activities/A123"},
-        "name": "sacro_validation",
-        "description": "sacro validation",
-        "datePublished": "now",
-        "license": {"@id": "http://spdx.org/licenses/CC0-1.0"},
-        "version": "2",
-        
-    })
-
-    return crate
