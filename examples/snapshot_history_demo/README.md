@@ -1,4 +1,4 @@
-# ro-crate-py walkthrough
+# Snapshot history demo (ro-crate-py walkthrough)
 
 Small scripts for learning [ro-crate-py](https://github.com/ResearchObject/ro-crate-py)
 and trying out snapshot ideas for 5s-crate-py. These are learning examples, not library code.
@@ -25,10 +25,10 @@ Each part uses the folders made by the part before it.
 | `part_d.py` | Demo of "option C" from [#3](https://github.com/eScienceLab/5s-crate-py/issues/3): the caller hands over old snapshots, the library works out the next version and `pav:previousVersion` and checks for mistakes | `crate_v2/` |
 
 ```
-python examples/ro_crate_py_walkthrough/part_a.py
-python examples/ro_crate_py_walkthrough/part_b.py
-python examples/ro_crate_py_walkthrough/part_c.py
-python examples/ro_crate_py_walkthrough/part_d.py
+python examples/snapshot_history_demo/part_a.py
+python examples/snapshot_history_demo/part_b.py
+python examples/snapshot_history_demo/part_c.py
+python examples/snapshot_history_demo/part_d.py
 ```
 
 To start again, delete the `crate_v*` folders. They are not committed.
