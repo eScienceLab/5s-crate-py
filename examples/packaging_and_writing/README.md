@@ -24,12 +24,14 @@ Each script runs on its own.
 | --- | --- | --- |
 | `packaging.py` | Packaging files (#6): copying a file, copying to a new path, copying a whole folder, and recording a web address as a reference without copying it | `packaged_crate/` |
 | `dates.py` | Dates when writing (#7), following Doug's rules from [#8](https://github.com/eScienceLab/5s-crate-py/issues/8): `dateCreated`, `datePublished` and `dateModified` for working records and snapshots | `dates_working/`, `dates_snapshot/` |
+| `trailing_slash.py` | Reproduces a ro-crate-py bug: a snapshot with a spec-style root `@id` (no trailing `/`) can't be reloaded after ro-crate-py loads and re-saves it | `slash_*-ro-crate-metadata.json` |
 | `writing.py` | Writing crates (#7): to a folder, as a zip, and as a detached metadata file. Shows that `write()` overwrites silently, a sketch of "refuse to overwrite a snapshot", and the extra `/` ro-crate-py adds to detached root IDs | `written_crate/`, `written_crate.zip`, `snapshot-v2-ro-crate-metadata.json` |
 
 ```
 python examples/packaging_and_writing/packaging.py
 python examples/packaging_and_writing/writing.py
 python examples/packaging_and_writing/dates.py
+python examples/packaging_and_writing/trailing_slash.py
 ```
 
 `sample_files/` holds the small files the scripts package.
@@ -45,8 +47,10 @@ To start again, delete the generated outputs listed above. They are not committe
   `add_tree("folder")` also lists every file inside it.
 - **`write()` overwrites silently:** 5s-crate-py needs to add the "never overwrite a
   snapshot" rule itself.
-- **Detached root IDs get a trailing `/`:** asking for `.../versions/2` gives
-  `.../versions/2/`. This may clash with snapshot identifiers written without the slash.
+- **Root IDs get a trailing `/`, which breaks re-saved crates:** ro-crate-py always adds `/`
+  to a Dataset `@id`, but the Five Safes spec examples use none (e.g. `.../versions/1`).
+  Loading and re-saving such a crate changes the root `@id` but not the descriptor's
+  `about`, and the result can't be loaded again. See `trailing_slash.py`.
 - **ro-crate-py fills in `datePublished`:** a new crate gets one automatically, and so does
   a crate *loaded* without one (set to the load time). It never sets `dateCreated`.
   Setting `datePublished` to `None` writes `null` to the file, so delete the key instead.
